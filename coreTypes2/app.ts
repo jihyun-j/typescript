@@ -18,3 +18,8 @@ let favActivities: string[]; // Array of Strings
 // 위 두가지의 에러를 방지하기 위해서는 any[]를 사용하는데 그리 좋은 방법은 아님
 
 console.log(person.name);
+
+for (const hobby of person.hobbies) {
+  console.log(hobby.toLocaleUpperCase()); // 배열에서 hobby라는 하나의 원소가 string type이기 때문에 가능
+  console.log(hobby.map()); // string type에서는 사용할 수 없는 method
+}
