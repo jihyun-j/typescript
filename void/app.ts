@@ -24,3 +24,13 @@ let combineValues: (a: number, b: number) => number; // 2개의 매개변수와 
 combineValues = add; // any type
 // combineValues = printResults; // Function을 사용했을 때, 두개의 매개변수를 받아야하는에 에러가 발생하지 않음, undefined
 console.log(combineValues(8, 8));
+
+// callback function
+function addAndHandle(n1: number, n2: number, cb: (name: number) => void) {
+  const result = n1 + n2;
+  cb(result);
+}
+
+addAndHandle(19, 29, (result) => {
+  console.log(result);
+});
