@@ -16,3 +16,11 @@ function printResults2(num: number): undefined {
 
 printResults(add(1, 5));
 printResults2(add(1, 5));
+
+// function type
+// let combineValues: Function;
+let combineValues: (a: number, b: number) => number; // 2개의 매개변수와 숫자반환
+
+combineValues = add; // any type
+// combineValues = printResults; // Function을 사용했을 때, 두개의 매개변수를 받아야하는에 에러가 발생하지 않음, undefined
+console.log(combineValues(8, 8));
