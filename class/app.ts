@@ -47,6 +47,20 @@ console.log(it);
 class AccountingDepartment extends Department {
   private lastReport: string;
 
+  get mostRecentReport() {
+    if (this.lastReport) {
+      return this.lastReport;
+    }
+    throw new Error("No report found");
+  }
+
+  set mostRecentReport(value: string) {
+    if (!value) {
+      throw new Error("Please pass in a vaild value");
+    }
+    this.addReport(value);
+  }
+
   constructor(id: string, private reports: string[]) {
     super(id, "Accounting");
     this.lastReport = reports[0];
@@ -62,6 +76,9 @@ class AccountingDepartment extends Department {
 
   addReport(text: string) {
     this.reports.push(text);
+    // lastReport는 private이기 때문에 매서드 안에서 접근은 할 수 있지만 닷표기법으로 액세스할 수없다
+    // 해결방법은 getter 사용
+    this.lastReport = text;
   }
 
   getReports() {
@@ -73,6 +90,12 @@ const accounting = new AccountingDepartment("d2", []);
 accounting.addReport("Something went wrong");
 accounting.addEmployee("Max");
 accounting.addEmployee("Manu");
+
+// getter
+console.log(accounting.mostRecentReport);
+
+// setter
+accounting.mostRecentReport = "Year End Report";
 
 // const accounting = new Department("ss", "Accounting");
 // accounting.describe(); // Deparment: Accounting -> accounting 변수 값 참조

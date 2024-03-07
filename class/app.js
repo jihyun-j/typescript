@@ -62,6 +62,22 @@ var AccountingDepartment = /** @class */ (function (_super) {
         _this.lastReport = reports[0];
         return _this;
     }
+    Object.defineProperty(AccountingDepartment.prototype, "mostRecentReport", {
+        get: function () {
+            if (this.lastReport) {
+                return this.lastReport;
+            }
+            throw new Error("No report found");
+        },
+        set: function (value) {
+            if (!value) {
+                throw new Error("Please pass in a vaild value");
+            }
+            this.addReport(value);
+        },
+        enumerable: false,
+        configurable: true
+    });
     // overriding properties
     AccountingDepartment.prototype.addEmployee = function (name) {
         if (name === "Max") {
@@ -71,6 +87,9 @@ var AccountingDepartment = /** @class */ (function (_super) {
     };
     AccountingDepartment.prototype.addReport = function (text) {
         this.reports.push(text);
+        // lastReport는 private이기 때문에 매서드 안에서 접근은 할 수 있지만 닷표기법으로 액세스할 수없다
+        // 해결방법은 getter 사용
+        this.lastReport = text;
     };
     AccountingDepartment.prototype.getReports = function () {
         console.log(this.reports);
@@ -81,6 +100,10 @@ var accounting = new AccountingDepartment("d2", []);
 accounting.addReport("Something went wrong");
 accounting.addEmployee("Max");
 accounting.addEmployee("Manu");
+// getter
+console.log(accounting.mostRecentReport);
+// setter
+accounting.mostRecentReport = "Year End Report";
 // const accounting = new Department("ss", "Accounting");
 // accounting.describe(); // Deparment: Accounting -> accounting 변수 값 참조
 // describe 매개변수가 없는 경우
