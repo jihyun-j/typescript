@@ -1,6 +1,6 @@
 class Department {
   name: string;
-  private employees: string[] = [];
+  private readonly employees: string[] = []; // readonly는 타입스크립에서만 존재하면 한번 정의하면 수정할 수 없다.(extra safe)
 
   constructor(n: string) {
     this.name = n;
@@ -37,7 +37,7 @@ accounting.addEmployee("Manu");
 
 // private을 설정해 놓으면 더이상 이러한 방식으로 접근할 수 없다. 오직 Class안에서만 접근할 수 있다.
 // Class외부에서 접근하기 위해서는 public으로 적용해야하는데 이것은 이미 기본값으로 설정되어있다.
-accounting.employees[2] = "Anna";
+// accounting.employees[2] = "Anna";
 
 accounting.describe();
 accounting.printEmployeeInformation();
