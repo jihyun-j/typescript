@@ -1,7 +1,8 @@
 class Department {
   // private readonly id: string
   // private name: string;
-  private employees: string[] = []; // readonly는 타입스크립에서만 존재하면 한번 정의하면 수정할 수 없다.(extra safe)
+  // protected는 private과 비슷하지만 다른점이 class 내부에서도 사용할 수 있지만 class 확장하는 모든 클래스에서도 사용 가능하다
+  protected employees: string[] = []; // readonly는 타입스크립에서만 존재하면 한번 정의하면 수정할 수 없다.(extra safe)
 
   constructor(private readonly id: string, public name: string) {
     // this.name = name;
@@ -42,6 +43,36 @@ it.describe();
 it.printEmployeeInformation();
 
 console.log(it);
+
+class AccountingDepartment extends Department {
+  private lastReport: string;
+
+  constructor(id: string, private reports: string[]) {
+    super(id, "Accounting");
+    this.lastReport = reports[0];
+  }
+
+  // overriding properties
+  addEmployee(name: string) {
+    if (name === "Max") {
+      return;
+    }
+    this.employees.push(name);
+  }
+
+  addReport(text: string) {
+    this.reports.push(text);
+  }
+
+  getReports() {
+    console.log(this.reports);
+  }
+}
+
+const accounting = new AccountingDepartment("d2", []);
+accounting.addReport("Something went wrong");
+accounting.addEmployee("Max");
+accounting.addEmployee("Manu");
 
 // const accounting = new Department("ss", "Accounting");
 // accounting.describe(); // Deparment: Accounting -> accounting 변수 값 참조

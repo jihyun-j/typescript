@@ -19,6 +19,7 @@ var Department = /** @class */ (function () {
         this.name = name;
         // private readonly id: string
         // private name: string;
+        // protected는 private과 비슷하지만 다른점이 class 내부에서도 사용할 수 있지만 class 확장하는 모든 클래스에서도 사용 가능하다
         this.employees = []; // readonly는 타입스크립에서만 존재하면 한번 정의하면 수정할 수 없다.(extra safe)
         // this.name = name;
     }
@@ -53,6 +54,33 @@ it.addEmployee("Manu");
 it.describe();
 it.printEmployeeInformation();
 console.log(it);
+var AccountingDepartment = /** @class */ (function (_super) {
+    __extends(AccountingDepartment, _super);
+    function AccountingDepartment(id, reports) {
+        var _this = _super.call(this, id, "Accounting") || this;
+        _this.reports = reports;
+        _this.lastReport = reports[0];
+        return _this;
+    }
+    // overriding properties
+    AccountingDepartment.prototype.addEmployee = function (name) {
+        if (name === "Max") {
+            return;
+        }
+        this.employees.push(name);
+    };
+    AccountingDepartment.prototype.addReport = function (text) {
+        this.reports.push(text);
+    };
+    AccountingDepartment.prototype.getReports = function () {
+        console.log(this.reports);
+    };
+    return AccountingDepartment;
+}(Department));
+var accounting = new AccountingDepartment("d2", []);
+accounting.addReport("Something went wrong");
+accounting.addEmployee("Max");
+accounting.addEmployee("Manu");
 // const accounting = new Department("ss", "Accounting");
 // accounting.describe(); // Deparment: Accounting -> accounting 변수 값 참조
 // describe 매개변수가 없는 경우
