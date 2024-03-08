@@ -22,7 +22,13 @@ var Department = /** @class */ (function () {
         // protected는 private과 비슷하지만 다른점이 class 내부에서도 사용할 수 있지만 class 확장하는 모든 클래스에서도 사용 가능하다
         this.employees = []; // readonly는 타입스크립에서만 존재하면 한번 정의하면 수정할 수 없다.(extra safe)
         // this.name = name;
+        // console.log(this.fiscalYear) -> Error!!
     }
+    // static
+    // new 키워드를 사용하지 않고 그룹화
+    Department.createEmployee = function (name) {
+        return { name: name };
+    };
     // 'describe' 메소드 추가
     Department.prototype.describe = function () {
         console.log("Department: " + this.name);
@@ -34,6 +40,7 @@ var Department = /** @class */ (function () {
         console.log(this.employees.length);
         console.log(this.employees);
     };
+    Department.fiscalYear = 2020;
     return Department;
 }());
 // Inheritance
@@ -119,3 +126,5 @@ accounting.mostRecentReport = "Year End Report";
 // accounting.employees[2] = "Anna";
 // accounting.describe();
 // accounting.printEmployeeInformation();
+var employee1 = Department.createEmployee("Max");
+console.log(employee1, Department.fiscalYear); // {name: 'Max'} 2020

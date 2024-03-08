@@ -1,4 +1,5 @@
 class Department {
+  static fiscalYear = 2020;
   // private readonly id: string
   // private name: string;
   // protected는 private과 비슷하지만 다른점이 class 내부에서도 사용할 수 있지만 class 확장하는 모든 클래스에서도 사용 가능하다
@@ -6,6 +7,15 @@ class Department {
 
   constructor(private readonly id: string, public name: string) {
     // this.name = name;
+    // console.log(this.fiscalYear) -> Error!! static 속성은 constructor에서 사용할 수 없다
+    // 만약 사용해야한다면 아래와 같이 사용해야함
+    console.log(Department.fiscalYear);
+  }
+
+  // static
+  // new 키워드를 사용하지 않고 그룹화
+  static createEmployee(name: string) {
+    return { name: name };
   }
 
   // 'describe' 메소드 추가
@@ -117,3 +127,7 @@ accounting.mostRecentReport = "Year End Report";
 
 // accounting.describe();
 // accounting.printEmployeeInformation();
+
+// static 사용법
+const employee1 = Department.createEmployee("Max");
+console.log(employee1, Department.fiscalYear); // {name: 'Max'} 2020
