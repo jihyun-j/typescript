@@ -22,16 +22,14 @@ var Department = /** @class */ (function () {
         // protected는 private과 비슷하지만 다른점이 class 내부에서도 사용할 수 있지만 class 확장하는 모든 클래스에서도 사용 가능하다
         this.employees = []; // readonly는 타입스크립에서만 존재하면 한번 정의하면 수정할 수 없다.(extra safe)
         // this.name = name;
-        // console.log(this.fiscalYear) -> Error!!
+        // console.log(this.fiscalYear) -> Error!! static 속성은 constructor에서 사용할 수 없다
+        // 만약 사용해야한다면 아래와 같이 사용해야함: 클래스 이름을 써서 정적 속성과 메소드에 접근 권한을 준다
+        console.log(Department.fiscalYear);
     }
     // static
     // new 키워드를 사용하지 않고 그룹화
     Department.createEmployee = function (name) {
         return { name: name };
-    };
-    // 'describe' 메소드 추가
-    Department.prototype.describe = function () {
-        console.log("Department: " + this.name);
     };
     Department.prototype.addEmployee = function (employee) {
         this.employees.push(employee);
@@ -53,6 +51,9 @@ var ITDepartment = /** @class */ (function (_super) {
         _this.admins = admins;
         return _this;
     }
+    ITDepartment.prototype.describe = function () {
+        console.log("IT Department - ID: " + this.id);
+    };
     return ITDepartment;
 }(Department));
 var it = new ITDepartment("id", ["Max"]);
@@ -85,6 +86,9 @@ var AccountingDepartment = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
+    AccountingDepartment.prototype.describe = function () {
+        console.log("Accounting Department - ID: " + this.id);
+    };
     // overriding properties
     AccountingDepartment.prototype.addEmployee = function (name) {
         if (name === "Max") {
@@ -105,8 +109,8 @@ var AccountingDepartment = /** @class */ (function (_super) {
 }(Department));
 var accounting = new AccountingDepartment("d2", []);
 accounting.addReport("Something went wrong");
-accounting.addEmployee("Max");
-accounting.addEmployee("Manu");
+// accounting.addEmployee("Max");
+// accounting.addEmployee("Manu");
 // getter
 console.log(accounting.mostRecentReport);
 // setter
@@ -126,5 +130,8 @@ accounting.mostRecentReport = "Year End Report";
 // accounting.employees[2] = "Anna";
 // accounting.describe();
 // accounting.printEmployeeInformation();
+// static 사용법
 var employee1 = Department.createEmployee("Max");
 console.log(employee1, Department.fiscalYear); // {name: 'Max'} 2020
+// abstract
+accounting.describe();
