@@ -80,3 +80,36 @@ function useVehicle(vehicle: Vehicle) {
 
 useVehicle(v1);
 useVehicle(v2);
+
+// Discriminated Unions
+interface Bird {
+  type: "bird"; // 리터럴 타입
+  flyingSpeed: number;
+}
+
+interface Horse {
+  type: "horse"; // 리터럴 타입
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+function moveAnimal(animal: Animal) {
+  // instanseof는 instance에서는 작동하지 않음 (오직 type에서만 작동함)
+  // if(animal instanseof Bird) => Error!
+  //   if ("flyingSpeed" in animal) {
+  //     console.log("Moving with speed" + animal.flyingSpeed);
+  //   }
+
+  let speed;
+  switch (animal.type) {
+    case "bird":
+      speed = animal.flyingSpeed;
+      break;
+    case "horse":
+      speed = animal.runningSpeed;
+  }
+
+  console.log("Moving at speed" + speed);
+}
+
+moveAnimal({ type: "bird", flyingSpeed: 10 });

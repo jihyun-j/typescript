@@ -53,3 +53,20 @@ function useVehicle(vehicle) {
 }
 useVehicle(v1);
 useVehicle(v2);
+function moveAnimal(animal) {
+    // instanseof는 instance에서는 작동하지 않음 (오직 type에서만 작동함)
+    // if(animal instanseof Bird) => Error!
+    //   if ("flyingSpeed" in animal) {
+    //     console.log("Moving with speed" + animal.flyingSpeed);
+    //   }
+    var speed;
+    switch (animal.type) {
+        case "bird":
+            speed = animal.flyingSpeed;
+            break;
+        case "horse":
+            speed = animal.runningSpeed;
+    }
+    console.log("Moving at speed" + speed);
+}
+moveAnimal({ type: "bird", flyingSpeed: 10 });
