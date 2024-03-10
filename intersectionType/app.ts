@@ -129,3 +129,14 @@ const userInput1 = <HTMLInputElement>document.getElementById("user-input")!;
 // 방법 2
 const userInput2 = document.getElementById("user-input")! as HTMLInputElement;
 userInput2.value = "Hi tere";
+
+// Index propeties
+interface ErrorContainer {
+  // {email: 'Not a valid email', username: 'musxt start with string'}
+  [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  email: "Not a valid email!",
+  username: "Must start with a capital character!",
+};

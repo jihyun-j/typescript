@@ -82,3 +82,7 @@ var userInput1 = document.getElementById("user-input");
 // 방법 2
 var userInput2 = document.getElementById("user-input");
 userInput2.value = "Hi tere";
+var errorBag = {
+    email: "Not a valid email!",
+    username: "Must start with a capital character!",
+};
