@@ -1,6 +1,7 @@
 // interface는 물체의 구조 설명, 타입스크립트에서만 존재
 // 객체의 구조를 정의하고 타입을 정의
 // interface가 type보다 더 명확하게 정의 가능
+// interface는 다중 상속이 가능
 var Person = /** @class */ (function () {
     function Person(n) {
         this.age = 30;
@@ -14,3 +15,7 @@ var Person = /** @class */ (function () {
 var user1;
 user1 = new Person("Max");
 console.log(user1);
+var add;
+add = function (n1, n2) {
+    return n1 + n2;
+};

@@ -33,6 +33,7 @@ interface Greetable extends Named {
   greet(phrase: string): void;
 }
 
+// interface는 다중 상속이 가능
 class Person implements Greetable, Named {
   name: string;
   age = 30;
@@ -49,3 +50,13 @@ class Person implements Greetable, Named {
 let user1: Greetable;
 user1 = new Person("Max");
 console.log(user1);
+
+// 함수 유형의 interface
+interface Addfn {
+  (a: number, b: number): number;
+}
+
+let add: Addfn;
+add = (n1: number, n2: number) => {
+  return n1 + n2;
+};
