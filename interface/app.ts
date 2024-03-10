@@ -23,6 +23,10 @@
 
 interface Named {
   readonly name: string;
+  // 아래의 속성이 존재할 수도 존재하지 않을 수도 있음 (optional property: ?)
+  // 유연성 제공
+
+  outputName?: string;
 }
 
 // Class //
