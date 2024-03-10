@@ -113,3 +113,19 @@ function moveAnimal(animal: Animal) {
 }
 
 moveAnimal({ type: "bird", flyingSpeed: 10 });
+
+// Type Casting
+const paragraph = document.querySelector("p"); // HTMLParagraphElement | null
+const paragraph1 = document.getElementById("massage-output"); // HTMLElement | null
+
+// const userInput = document.getElementById("user-input")!; // HTMLElement | null
+// userInput.value = "Hi tere"; // !!Error!!
+
+// 방법 1 또는 방법 2 둘 중 하나만 사용 -> 일관성 유지
+// 느낌표를 사용 대신 if문 사용해 null 타입 확인
+// 방법 1
+const userInput1 = <HTMLInputElement>document.getElementById("user-input")!;
+
+// 방법 2
+const userInput2 = document.getElementById("user-input")! as HTMLInputElement;
+userInput2.value = "Hi tere";
