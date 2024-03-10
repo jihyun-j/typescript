@@ -11,6 +11,7 @@ function add(a, b) {
     }
     return a + b;
 }
+var result = add("Max", "yes");
 function printEmployeeInformation(emp) {
     console.log("Name: " + emp.name);
     // 커스텀 타입 대신에 'in' 사용 (타입스크립트 빌트인)
